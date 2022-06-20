@@ -40,3 +40,4 @@ except Exception as e:
 try:
     nft_df.to_csv("ppmain.csv", index=False)
 except Exception as e:
+    error = {"error": e}

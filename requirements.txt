@@ -1,0 +1,6 @@
+pyyaml
+requests
+pandas
+web3
+pymongo
+dnspython

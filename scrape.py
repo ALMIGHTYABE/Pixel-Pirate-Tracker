@@ -29,7 +29,6 @@ try:
     wallet_address = []
     for i in nft_df['number']:
         wallet_address.append(contract_instance.functions.ownerOf(int(i)).call())
-        print(i)
 
     nft_df['address'] = wallet_address # Appending addresses to DF
     nft_df['Batch'] = ppnos['Batch'] # Appending Batch Number to DF

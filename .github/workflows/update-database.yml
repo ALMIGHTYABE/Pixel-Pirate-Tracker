@@ -1,4 +1,4 @@
-name: Update pp
+name: Update ppmain
 on:
   schedule:
     - cron: '0 */2 * * *'
@@ -6,7 +6,7 @@ on:
 
 jobs:
   update_symbol_list:
-    name: Update pp periodically
+    name: Update ppmain periodically
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,8 +22,6 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run Script
-        env:
-          MONGODB_CONNECTION_STRING: ${{ secrets.MONGODB_CONNECTION_STRING }}
         run: |
           python scrape.py
       - name: Commit and Push Changes

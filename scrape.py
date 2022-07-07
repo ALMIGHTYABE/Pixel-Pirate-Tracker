@@ -16,7 +16,7 @@ def read_params(config_path):
 
 config = read_params(params_path)
 
-# Scrape Data
+# Scrape Data and Save to CSV
 try:
     ppnos = pd.read_csv(config["traits"]["pp_nos_csv"])
     nft_df = pd.read_csv(config["scrape"]["pp_traits_csv"])
@@ -33,11 +33,7 @@ try:
         wallet_address.append(contract_instance.functions.ownerOf(int(i)).call())
 
     nft_df['address'] = wallet_address  # Appending addresses to DF
-except Exception as e:
-    error = {"error": e}
 
-# Save to CSV
-try:
-    nft_df.to_csv("ppmain.csv", index=False)
+    nft_df.to_csv("ppmain.csv", index=False)  # Save to CSV
 except Exception as e:
     error = {"error": e}

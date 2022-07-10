@@ -48,6 +48,7 @@ try:
         sales_hist = pd.json_normalize(sale)  # JSON to DF
         sales_hist.price = sales_hist.price.apply(lambda x: int(x) / 1000000000000000000)
         sales_hist.endTime = sales_hist.endTime.apply(lambda x: time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(x))))
+        df['endTime'] = pd.to_datetime(df['endTime']).dt.date
         sales_hist['tokenId'] = sales_hist['tokenId'].apply(lambda x: int(x))
         sales_hist = sales_hist[sales_hist["tokenId"].isin(nft_df["number"])]
         sales_hist = pd.merge(sales_hist, nft_df[['number', 'image', 'Batch', 'Type', 'Total Score']], left_on ='tokenId', right_on ='number', how ='left')

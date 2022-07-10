@@ -30,14 +30,14 @@ try:
     abi = config["scrape"]["abi"]
     contract_address = config["scrape"]["contract_address"]
 
-    contract_instance = w3.eth.contract(address=contract_address, abi=abi)
-    wallet_address = []
-    for i in nft_df['number']:
-        wallet_address.append(contract_instance.functions.ownerOf(int(i)).call())
-
-    nft_df['address'] = wallet_address  # Appending addresses to DF
-
-    nft_df.to_csv("ppmain.csv", index=False)  # Save to CSV
+    # contract_instance = w3.eth.contract(address=contract_address, abi=abi)
+    # wallet_address = []
+    # for i in nft_df['number']:
+    #     wallet_address.append(contract_instance.functions.ownerOf(int(i)).call())
+    #
+    # nft_df['address'] = wallet_address  # Appending addresses to DF
+    #
+    # nft_df.to_csv("ppmain.csv", index=False)  # Save to CSV
 
     sales_history = config["scrape"]["sales_history"]
 

@@ -46,7 +46,7 @@ try:
     if r.status_code == 200:
         sale = r.json()['sales']
         sales_df = pd.json_normalize(sale)  # JSON to DF
-        sales_df.price = df.price.apply(lambda x: int(x) / 1000000000000000000)
+        sales_df.price = sales_df.price.apply(lambda x: int(x) / 1000000000000000000)
         sales_df.endTime = sales_df.endTime.apply(lambda x: time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(x))))
         sales_df.to_csv("pphistory.csv", index=False)  # Save to CSV
     

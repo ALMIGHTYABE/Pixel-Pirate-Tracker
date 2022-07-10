@@ -49,6 +49,8 @@ try:
         sales_df.price = df.price.apply(lambda x: int(x) / 1000000000000000000)
         sales_df.endTime = sales_df.endTime.apply(lambda x: time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(x))))
         sales_df.to_csv("pphistory.csv", index=False)  # Save to CSV
+    else:
+        pass
         
 except Exception as e:
     error = {"error": e}

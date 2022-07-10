@@ -45,10 +45,15 @@ try:
     # Status Code Check
     if r.status_code == 200:
         sale = r.json()['sales']
-        sales_df = pd.json_normalize(sale)  # JSON to DF
-        sales_df.price = sales_df.price.apply(lambda x: int(x) / 1000000000000000000)
-        sales_df.endTime = sales_df.endTime.apply(lambda x: time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(x))))
-        sales_df.to_csv("pphistory.csv", index=False)  # Save to CSV
+        sales_hist = pd.json_normalize(sale)  # JSON to DF
+        sales_hist.price = sales_hist.price.apply(lambda x: int(x) / 1000000000000000000)
+        sales_hist.endTime = sales_hist.endTime.apply(lambda x: time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(x))))
+        sales_hist['tokenId'] = sales_hist['tokenId'].apply(lambda x: int(x))
+        sales_hist = sales_hist[sales_hist["tokenId"].isin(nft_df["number"])]
+        sales_hist = pd.merge(sales_hist, nft_df[['number', 'image','Batch','Total Score']], left_on ='tokenId', right_on ='number', how ='left')
+        sales_hist['image'] = sales_hist['image'].apply(lambda x: '<img src=' + x + ' width="100">')
+        sales_hist['Rarity Score / FTM'] = sales_hist['Total Score'] / sales_hist['price']
+        sales_hist.to_csv("pphistory.csv", index=False)  # Save to CSV
     
         
 except Exception as e:

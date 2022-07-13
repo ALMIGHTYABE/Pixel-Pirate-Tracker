@@ -6,7 +6,7 @@ on:
 
 jobs:
   update_symbol_list:
-    name: Update ppmain periodically
+    name: Update ppdata periodically
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

@@ -3,7 +3,6 @@ import yaml
 import os
 import pandas as pd
 from web3 import Web3
-from pymongo import MongoClient
 import requests
 import time
 from datetime import datetime
